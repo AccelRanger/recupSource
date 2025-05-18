@@ -185,8 +185,11 @@ void loop() {
     previousRegulationTime = currentTime;
 
     double* waterDistance = HCSR04.measureDistanceCm();
-//    Serial.print("Water Level: ");
-//    Serial.print(waterDistance);
+    double distance = *waterDistance;
+    int waterDistanceV= static_cast<int>(distance);
+
+    Serial.print("Water Level: ");
+    Serial.print(waterDistanceV);
 
     compressor(waterDistance < midSpotReg); // True/False latching logic for compressor
 
