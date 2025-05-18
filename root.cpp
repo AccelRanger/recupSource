@@ -1,5 +1,7 @@
 // AccelSystems // LU18/05/25//
 
+#include <HCSR04.h>
+
 // Config
 
 // Constants
@@ -16,6 +18,11 @@ int valvePosition = 0;
 const int VRx = A0;
 const int VRy = A1;
 const int SW = A2;
+
+// Distance Sensor Pins
+
+byte triggerPin = 21;
+byte echoPin = 12;
 
 // Functions
 
@@ -74,6 +81,9 @@ void setup() {
   // Start serial communication
   Serial.begin(9600);
 
+  // init libraries
+  HCSR04.begin(triggerPin, echoPin);
+  // init functions
   setValveSpeed(15);
   valve("open");
 }
@@ -81,5 +91,5 @@ void setup() {
 // Loop
 
 void loop() {
-  
+  double* waterDistance = HCSR04.measureDistanceCm(); // distance
 }
